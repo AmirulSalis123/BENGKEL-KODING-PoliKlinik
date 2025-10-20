@@ -1,8 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController; 
-
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DokterController;
+// use App\Http\Controllers\ObatController;
+// use App\Http\Controllers\PasienController;
+use App\Http\Controllers\PoliController;
+use Illuminate\Routing\Router;
 
 // 1. ROUTE UTAMA / DEFAULT
 Route::get('/', function () {
@@ -24,6 +28,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
+
+    Route::resource('polis', PoliController::class);
+    Route::resource('dokters', DokterController::class);
+    // Route::resource('pasien', PasienController::class);
+    // Route::resource('obat', ObatController::class);
 });
 
 // DASHBOARD DOKTER 

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -12,7 +15,10 @@ public function showLogin()
     return view('auth.login');
 }
 
-
+public function showRegister()
+{
+    return view('auth.register');
+}
 
 public function login(Request $request){
     $credentials = $request->only('email', 'password');
@@ -22,7 +28,7 @@ public function login(Request $request){
 
     if ($user->role == 'admin') {
         return redirect()->route('admin.dashboard');
-    } elseif ($user->role = 'dokter') {
+    } elseif ($user->role == 'dokter') {
         return redirect()->route('dokter.dashboard');
     } else {
         return redirect()->route('pasien.dashboard');
@@ -59,4 +65,9 @@ return redirect()->route('login');
 
 }
 
+public function logout(){
+    Auth::logout();
+    return redirect()->route('login');
+
+}
 }

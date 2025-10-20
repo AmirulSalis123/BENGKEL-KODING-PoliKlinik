@@ -13,6 +13,7 @@ class User extends Authenticatable{
     'alamat',
     'no_ktp',
     'role',
+    'email',
     'id poli',
     'password'
     ];
@@ -20,7 +21,7 @@ class User extends Authenticatable{
 protected $shidden =[
 
     'password',
-    'canorber token',
+    'remember_token',
 ];
 
 protected function casts(): array

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DaftarPoli extends Model
+class Poli extends Model
 {
     protected $table = 'poli';
 protected $fillable = [
