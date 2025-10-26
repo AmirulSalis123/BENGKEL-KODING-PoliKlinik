@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DokterController;
-// use App\Http\Controllers\ObatController;
-// use App\Http\Controllers\PasienController;
+use App\Http\Controllers\ObatController;
+use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PoliController;
 use Illuminate\Routing\Router;
 
@@ -28,11 +28,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
-
     Route::resource('polis', PoliController::class);
     Route::resource('dokters', DokterController::class);
-    // Route::resource('pasien', PasienController::class);
-    // Route::resource('obat', ObatController::class);
+    Route::resource('pasien', PasienController::class);
+    Route::resource('obat', ObatController::class);
 });
 
 // DASHBOARD DOKTER 
@@ -48,3 +47,4 @@ Route::middleware(['auth', 'role:pasien'])->prefix('pasien')->group(function () 
         return view('pasien.dashboard');
     })->name('pasien.dashboard');
 });
+

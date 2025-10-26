@@ -16,7 +16,7 @@
                     </div>
                 @endif
 
-                <h1 class="mb-4">Data Polis</h1>
+                <h1 class="mb-4">Data Poli</h1>
 
                 <a href="{{ route('polis.create') }}" class="btn btn-primary mb-3">
                     <i class="fas fa-plus"></i> Tambah Poli
@@ -52,7 +52,7 @@
                             @empty
                                 <tr>
                                     <td class="text-center" colspan="7">
-                                        Belum ada Poli
+                                        Belum ada data poli
                                     </td>
                                 </tr>
                             @endforelse

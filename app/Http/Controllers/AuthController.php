@@ -34,7 +34,7 @@ public function login(Request $request){
         return redirect()->route('pasien.dashboard');
     }
 }
-return back()->withErrors(['email' => 'Email atau Password Salah!']);
+return back()->withErrors(['email' => 'Email atau password salah!']);
 
 }
 
