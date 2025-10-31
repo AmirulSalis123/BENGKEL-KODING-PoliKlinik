@@ -10,7 +10,6 @@ class DokterController extends Controller
 {
     public function index()
     {
-        // dimana role adalah dokter
         $dokters = User::where('role', 'dokter')->with('poli')->get();
         return view('admin.dokter.index', compact('dokters'));
     }

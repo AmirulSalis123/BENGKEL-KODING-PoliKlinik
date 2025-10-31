@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Poli extends Model
+class DaftarPoli extends Model
 {
 
 protected $table = 'daftar_poli';

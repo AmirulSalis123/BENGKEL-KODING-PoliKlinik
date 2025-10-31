@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Poli extends Model
 {
     protected $table = 'poli';
-protected $fillable = [
+    protected $fillable = [
 
 'nama_poli',
 'keterangan'

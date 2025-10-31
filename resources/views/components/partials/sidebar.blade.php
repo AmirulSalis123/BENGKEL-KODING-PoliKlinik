@@ -23,7 +23,8 @@
                 <!-- ROLE ADMIN -->
                 @if (request()->is('admin*'))
                     <li class="nav-item">
-                        <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                        <a href="{{ route('admin.dashboard') }}" 
+                            class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard Admin
@@ -64,14 +65,15 @@
                 <!-- ROLE PASIEN -->
                 @if (request()->is('pasien*'))
                     <li class="nav-item">
-                        <a href="{{ route('pasien.dashboard') }}" class="nav-link {{ request()->routeIs('pasien.dashboard') ? 'active' : '' }}">
+                        <a href="{{ route('pasien.dashboard') }}" 
+                            class="nav-link {{ request()->routeIs('pasien.dashboard') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-columns"></i>
                             <p>
                                 Dashboard Pasien
                             </p>
                         </a>
                     </li>
-                    {{-- <li class="nav-item">
+                    <li class="nav-item">
                         <a href="{{ route('pasien.daftar') }}"
                             class="nav-link {{ request()->routeIs('pasien.daftar') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-hospital-user"></i>
@@ -79,19 +81,31 @@
                                 Poli
                             </p>
                         </a>
-                    </li> --}}
+                    </li>
                 @endif
 
                 <!-- ROLE DOKTER -->
                 @if (request()->is('dokter*'))
                     <li class="nav-item">
-                        <a href="{{ route('dokter.dashboard') }}" class="nav-link {{ request()->routeIs('dokter.dashboard') ? 'active' : '' }}">
+                        <a href="{{ route('dokter.dashboard') }}" 
+                            class="nav-link {{ request()->routeIs('dokter.dashboard') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-columns"></i>
                             <p>
                                 Dashboard Dokter
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('jadwal-periksa.index') }}" 
+                            class="nav-link {{ request()->routeIs('jadwal-periksa.*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-calendar-check"></i>
+                            <p>
+                                Jadwal Periksa
+                            </p>
+                        </a>
+                    </li>
+                    
+
                 @endif
 
                 <li class="nav-item ">

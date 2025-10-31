@@ -13,6 +13,7 @@ class User extends Authenticatable{
     'alamat',
     'no_ktp',
     'no_hp',
+    'no_rm',
     'role',
     'email',
     'id_poli',
