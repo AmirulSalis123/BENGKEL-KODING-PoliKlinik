@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-        <span class="brand-text font-weight-light ">Poliklinik</span>
+        <span class="brand-text font-weight-light">Poliklinik</span>
     </a>
 
     <!-- Sidebar -->
@@ -20,15 +20,14 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-sidebar flex-column">
+                
                 <!-- ROLE ADMIN -->
-                @if (request()->is('admin*'))
+                @if (Auth::user()->role == 'admin')
                     <li class="nav-item">
                         <a href="{{ route('admin.dashboard') }}" 
                             class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>
-                                Dashboard Admin
-                            </p>
+                            <p>Dashboard Admin</p>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -60,55 +59,65 @@
                         </a>
                     </li>
 
-                @endif
-
                 <!-- ROLE PASIEN -->
-                @if (request()->is('pasien*'))
+                @elseif (Auth::user()->role == 'pasien')
                     <li class="nav-item">
                         <a href="{{ route('pasien.dashboard') }}" 
                             class="nav-link {{ request()->routeIs('pasien.dashboard') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-columns"></i>
-                            <p>
-                                Dashboard Pasien
-                            </p>
+                            <p>Dashboard Pasien</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('pasien.daftar') }}"
                             class="nav-link {{ request()->routeIs('pasien.daftar') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-hospital-user"></i>
-                            <p>
-                                Poli
-                            </p>
+                            <p>Poli</p>
                         </a>
                     </li>
-                @endif
+                    <li class="nav-item">
+                        <a href="{{ route('riwayat.index') }}" 
+                            class="nav-link {{ request()->routeIs('riwayat.*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-history"></i>
+                            <p>Riwayat</p>
+                        </a>
+                    </li>
 
                 <!-- ROLE DOKTER -->
-                @if (request()->is('dokter*'))
+                @elseif (Auth::user()->role == 'dokter')
                     <li class="nav-item">
                         <a href="{{ route('dokter.dashboard') }}" 
                             class="nav-link {{ request()->routeIs('dokter.dashboard') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-columns"></i>
-                            <p>
-                                Dashboard Dokter
-                            </p>
+                            <p>Dashboard Dokter</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('jadwal-periksa.index') }}" 
                             class="nav-link {{ request()->routeIs('jadwal-periksa.*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-calendar-check"></i>
-                            <p>
-                                Jadwal Periksa
-                            </p>
+                            <p>Jadwal Periksa</p>
                         </a>
                     </li>
-                    
+                    <li class="nav-item">
+                        <a href="{{ route('periksa-pasien.index') }}" 
+                            class="nav-link {{ request()->routeIs('periksa-pasien.*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-stethoscope"></i>
+                            <p>Periksa Pasien</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('riwayat-pasien.index') }}" 
+                            class="nav-link {{ request()->routeIs('riwayat-pasien.*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-history"></i>
+                            <p>Riwayat Pasien</p>
+                        </a>
+                    </li>
 
                 @endif
 
-                <li class="nav-item ">
+                <!-- Logout -->
+                <li class="nav-item">
                     <form method="POST" action="/logout">
                         @csrf
                         <button type="submit" class="nav-link btn btn-danger text-left w-100">
@@ -119,9 +128,5 @@
                 </li>
             </ul>
         </nav>
-        {{-- <form method="POST" action="/logout" class="btn btn-danger ml-4">
-            @csrf
-            <button>Keluar</button>
-        </form> --}}
     </div>
 </aside>

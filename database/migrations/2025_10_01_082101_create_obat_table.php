@@ -16,6 +16,8 @@ $table->string('nama_obat');
 
 $table->string('kemasan', 35)->nullable();
 
+$table->integer('stok')->default(0);
+
 $table->integer('harga');
 
 $table->timestamps();

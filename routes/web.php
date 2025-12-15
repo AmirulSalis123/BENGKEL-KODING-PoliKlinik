@@ -7,13 +7,32 @@ use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PoliController;
 use App\Http\Controllers\Pasien\PoliController as PasienPoliController;
+use App\Http\Controllers\Pasien\RiwayatController;
 use App\Http\Controllers\Dokter\JadwalPeriksaController as DokterJadwalPeriksaController;
+use App\Http\Controllers\Dokter\PeriksaPasienController as DokterPeriksaPasienController;
+use App\Http\Controllers\Dokter\RiwayatPasienController as DokterRiwayatPasienController;
 use Illuminate\Routing\Router;
 
 // 1. ROUTE UTAMA / DEFAULT
 Route::get('/', function () {
     return view('welcome');
+    
 });
+
+// Halaman utama
+Route::get('/home', function () {
+
+    return view('home');
+
+})->name('home');
+
+// Halaman kontak
+Route::get('/contact', function () {
+
+    return view('contact');
+
+})->name('contact');
+
 
 
 // 2. ROUTE AUTENTIKASI (LOGIN & REGISTER)
@@ -34,6 +53,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::resource('dokters', DokterController::class);
     Route::resource('pasien', PasienController::class);
     Route::resource('obat', ObatController::class);
+    Route::post('obat/{id}/restock', [ObatController::class, 'restock'])
+        ->name('obat.restock');
 });
 
 // DASHBOARD DOKTER 
@@ -41,8 +62,20 @@ Route::middleware(['auth', 'role:dokter'])->prefix('dokter')->group(function () 
     Route::get('/dashboard', function () {
         return view('dokter.dashboard');
     })->name('dokter.dashboard');
-    Route::resource('jadwal-periksa', DokterJadwalPeriksaController::class);
-
+    Route::resource('jadwal-periksa', DokterJadwalPeriksaController::class)
+        ->names('jadwal-periksa');
+    Route::get('/periksa-pasien', [DokterPeriksaPasienController::class, 'index'])
+        ->name('periksa-pasien.index');
+    Route::post('/periksa-pasien', [DokterPeriksaPasienController::class, 'store'])
+        ->name('periksa-pasien.store');
+    Route::get('/periksa-pasien/{id}', [DokterPeriksaPasienController::class, 'create'])
+        ->name('periksa-pasien.create');
+    Route::post('/periksa-pasien/check-stock', [DokterPeriksaPasienController::class, 'checkStock'])
+        ->name('periksa-pasien.check-stock');
+    Route::get('/riwayat-pasien', [DokterRiwayatPasienController::class, 'index'])
+        ->name('riwayat-pasien.index');
+    Route::get('/riwayat-pasien/{id}', [DokterRiwayatPasienController::class, 'show'])
+        ->name('riwayat-pasien.show');
 });
 
 // DASHBOARD PASIEN
@@ -51,8 +84,10 @@ Route::middleware(['auth', 'role:pasien'])->prefix('pasien')->group(function () 
         return view('pasien.dashboard');
     })->name('pasien.dashboard');
     Route::get('/daftar', [PasienPoliController::class, 'get'])
-    ->name('pasien.daftar');
+        ->name('pasien.daftar');
     Route::post('/daftar', [PasienPoliController::class, 'submit'])
-    ->name('pasien.daftar.submit');
+        ->name('pasien.daftar.submit');
+    Route::get('/riwayat', [RiwayatController::class, 'index'])
+        ->name('riwayat.index');
 });
 
